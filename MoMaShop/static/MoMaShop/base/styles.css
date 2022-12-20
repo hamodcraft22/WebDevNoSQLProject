@@ -1,0 +1,199 @@
+/*Full Website Style*/
+@font-face {font-family: mainFont; src: url(font.ttf);}
+
+html, body {height: 100%; width: 100%; margin: 0;}
+
+body {font-family: mainFont; background-color: #c1c1e1;}
+a {text-decoration: none;}
+
+.errorPage { text-align: center; background: url(media/ERROR.png);
+  background-size: 100%; background-position: center;}
+/*End Full Website Style*/
+
+
+
+/*Main Top Menu - on all pages*/
+#header {background-color: rgb(222, 223, 223); top: 0px; right: 0px; left: 0px;
+  position: fixed; height: 255px; text-align: center; z-index: 5;}
+
+#mainLogo {height: inherit;}
+
+.menuNav a {position: fixed; transition: 0.3s; width: 130px; color: white;
+  font-size: 20px; padding: 15px;}
+
+#menuR a {right: -105px; border-radius: 5px 0px 0px 5px; text-align: right;}
+#menuL a {left: -105px; border-radius: 0px 5px 5px 0px; text-align: left;}
+
+#menuR .active {right: 0px;}
+#menuR a:hover {right: 0;}
+#menuL a:hover {left: 0;}
+
+#home     {top: 10px; background-color: #2b38b2;}
+#services {top: 70px; background-color: #67549c;}
+#cart     {top: 130px; background-color: #bf5151;}
+#reviews  {top: 190px; background-color: #f38686;}
+#phone     {top: 70px; background-color: #2b38b2;}
+#mail {top: 130px; background-color: #bf5151;}
+
+.navIconR {float: left; width: 27px;} .navIconL {float: right; width: 27px;}
+/*End Main Top Menu - on all pages*/
+
+
+
+/*Inner Contaners Menu - services/cart/payment/lastOrder*/
+#navBar {background-color: grey; overflow: auto; text-align: center;
+  height: 44px; width: 100%;}
+
+#navBar a {float: left; padding: 12px 0px 12px; color: white; width: 33.33%;}
+
+#navBar a:hover {background-color: #555}
+
+.activeNav {background-color: #67549c;}
+/*End Inner Contaners Menu - services/cart/payment/lastOrder*/
+
+
+
+/*Page content - on all page*/
+#midCont {background-color: #a2a2ca; position: absolute; width: 80%;
+  top: 255px; right: 10%; bottom: 40px; overflow: auto; z-index: 3;
+  box-shadow:  -10px 0px 15px -15px, 10px 0px 15px -15px;}
+
+#btmPicture {position: fixed; bottom: 0px; left: 0px; width: 15%; z-index: 5;}
+
+#backVid {position: fixed; top: 100px; bottom: 40px; height: 100%;
+  object-fit: cover; right: 10%; width: 80%; z-index: -1;}
+
+#bttmBar {position: fixed; height: 40px; width: 100%; bottom: 0; left: 0;
+  background-color: #333333; text-align: center; z-index: 4;}
+/*End Page content - on all page*/
+
+
+
+/*Randome Use class*/
+.centerNoMarg {margin: 0px;}
+.white {color: white;}
+.lightPurpel {color: #67549c;}
+.pink {color: #f38686;}
+.red {color: #bf5151}
+/*End Randome Use class*/
+
+
+
+/*Buttons class*/
+.btn3D_Link {background: url(media/btn.png); background-repeat: no-repeat;
+  height: 50px; width: 180px; display: inline-block; text-align: center;
+  padding-top: 10px; font-size: 25px;}
+
+.btn3D_Input {background: url(media/btn.png); border: none; margin: 1em;
+  height: 50px; width: 180px; display: inline-block; text-align: center;
+  padding-top: 2px; font-size: 25px; font-family: mainFont; color: white;}
+
+.btn_Modify {height: 20px; width: 20px;}
+
+.btn_AddCart {background: url(media/addCart.png); height: 50px; width: 50px;
+   border-style: none; margin: 5px; display: inline-block;
+   background-size: contain;}
+/*End Buttons class*/
+
+
+
+/*Hompage Spisific Styling*/
+#homeCont {position: absolute; width: 80%;
+  top: 255px; right: 10%; bottom: 40px; overflow: auto; z-index: 3;
+  box-shadow:  -10px 0px 15px -15px, 10px 0px 15px -15px;}
+
+#innerTopCont {height: 200px; color: white;
+  background-color: rgba(0, 0, 0, 0.6);
+  box-shadow: 0 20px 40px 30px rgba(0, 0, 0, 0.6);}
+
+#player {float: right; width: 30%; height: 200px;}
+
+#youtubeFrame {width: 100%; height: 100%; border: none;}
+
+#textWrapCont {float: left; width: 70%; height: 100%;}
+
+#textCont {margin: 2%;}
+
+#aboutCont {position: absolute; bottom: 40px; text-align: center;
+  background-color: rgba(255, 255, 255, 0.4); width: 80%; left: 10%;
+  box-shadow: 0 20px 40px 30px rgba(255, 255, 255, 0.6);}
+
+#aboutTxtCont {margin-left: 2%; margin-right: 2%;}
+/*End Hompage Spisific Styling*/
+
+
+
+/*Shared Between Home And Services*/
+#itemsCont {position: absolute; width: 100%; padding-top: 2em;}
+
+.item {text-align: center; background: url(media/blur.png); width: 33%;
+   background-repeat: no-repeat; background-position: center;
+   display: inline-block;}
+
+.itemList {display: inline-block;}
+/*End Shared Between Home And Services*/
+
+
+
+/*Services Pages Spisific Styling*/
+.promoPics {height: 15em}
+/*End Services Pages Spisific Styling*/
+
+
+
+/*Review Pages Spisific Styling*/
+#writtenReviewsCont {width: 60%; vertical-align: top;}
+
+#reviewFormCont {width: 40%; vertical-align: top; text-align: center;
+  background-color: rgba(0, 0, 0, 0.3);
+  box-shadow: 0 20px 40px 30px rgba(0, 0, 0, 0.3);}
+
+#reviewFormCont h3 {display: inline-block;}
+
+.reviewCont {margin: 1em; margin-right: 4em;
+  background-color: rgba(255, 192, 203, 0.2);
+  box-shadow: 0 2px 3px 3px rgba(255, 192, 203, 0.2);}
+
+#alertTxt {font-size: 15px; font-style: italic; text-align: center;}
+/*End Review Pages Spisific Styling*/
+
+
+
+/*Order Items Styling - cart/Payment/lastOrder*/
+.cartItemCont {margin: 1em; width: 200px; display: none;
+  text-align: center; height: fit-content;
+  background-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 2px 3px 3px rgba(255, 255, 255, 0.2);}
+
+.cartItemCont p {display: inline-block; margin: 0.2em;}
+
+.cartPics {position: relative; height: 120px; margin: 10px;}
+
+.cartItems {padding: 0; margin: 5px; display: inline-block;}
+
+.centerCartItems{text-align: center;}
+
+#emptyCartCont {display: none}
+/*End Order Items Styling - cart/Payment/lastOrder*/
+
+
+
+/*Strtch View Styling - Reviews/Payment/lastOrder*/
+#innerMidCont {position: absolute; top: 44px; bottom: 0; width: 100%;}
+
+#innerMidSplitCont {position: absolute; width: 100%; min-height: 100%;
+  display: flex;}
+/*End Strtch View Styling - Reviews/Payment/lastOrder*/
+
+
+
+/*Orders Strtch View Styling - Payment/lastOrder*/
+#ViewCartCheckOut {width: 60%; vertical-align: top;}
+
+#PaymentInfoCont {width: 40%; vertical-align: top;
+  background-color: rgba(0, 0, 0, 0.3);
+  box-shadow: 0 20px 40px 30px rgba(0, 0, 0, 0.3);}
+
+#PaymentInfoCont h3 {display: inline-block;}
+#PaymentInfoCont p {display: inline-block;}
+/*End Orders Strtch View Styling - Payment/lastOrder*/
