@@ -1,15 +1,15 @@
-from django.db import models
+from djongo import models
 from django.conf import settings
 
 CATEGORY_CHOICES = (
-    ('SI', 'Still Image'),
-    ('AI', 'Animated Image'),
-    ('CV', 'Customized Video')
+    ('si', 'Still Image'),
+    ('ai', 'Animated Image'),
+    ('cv', 'Customized Video')
 )
 
 PAYMENT_CHOICES = (
-    ('CC', 'Credit Card'),
-    ('DC', 'Debit Card')
+    ('cc', 'Credit Card'),
+    ('dc', 'Debit Card')
 )
 ##fix these
 

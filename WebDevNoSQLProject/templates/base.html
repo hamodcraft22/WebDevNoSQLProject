@@ -26,9 +26,9 @@
         {% url 'home' as homePg %}
         <a href="{{homePg}}" {% if request.path == homePg %} class="active" {% endif %} id="home"><img class="navIconR" src="{% static 'base/media/home.png' %}" alt="Home Page">Home</a>
 
-        {% url 'services' id=1 as servicesPg1 %}
-        {% url 'services' id=2 as servicesPg2 %}
-        {% url 'services' id=3 as servicesPg3 %}
+        {% url 'services' categoryid="si" as servicesPg1 %}
+        {% url 'services' categoryid="ai" as servicesPg2 %}
+        {% url 'services' categoryid="cv" as servicesPg3 %}
         <a href="{{servicesPg1}}" {% if request.path == servicesPg1 or request.path == servicesPg2 or request.path == servicesPg3 %} class="active" {% endif %} id="services"><img class="navIconR" src="{% static 'base/media/services.png' %}" alt="Services Page">Services</a>
 
         {% url 'cart' as cartPg %}

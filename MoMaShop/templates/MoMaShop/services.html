@@ -1,15 +1,16 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block mainBody %}
 
-{% url 'services' id=1 as servicesPg1 %}
-{% url 'services' id=2 as servicesPg2 %}
-{% url 'services' id=3 as servicesPg3 %}
+{% url 'services' categoryid="si" as servicesPg1 %}
+{% url 'services' categoryid="ai" as servicesPg2 %}
+{% url 'services' categoryid="cv" as servicesPg3 %}
   <div id="navBar">
         <a href="{{servicesPg1}}" {% if request.path == servicesPg1 %} class="activeNav" {% endif %}>Still Images</a>
         <a href="{{servicesPg2}}" {% if request.path == servicesPg2 %} class="activeNav" {% endif %}>Animated Images</a>
         <a href="{{servicesPg3}}" {% if request.path == servicesPg3 %} class="activeNav" {% endif %}>Customized Videos</a>
-      </div>
+</div>
 
       <!-- below navigation mid container - items spisific-->
       <div id="itemsCont" >
@@ -17,13 +18,16 @@
         <div class="container h-100">
             <div class="row align-items-center h-100">
 
-                <div class="col-md-4 mx-auto">
-                    <div class="card align-items-center">
-                      <h5 class="card-title">Card title</h5>
-                          <img class="card-img-top" src="..." alt="Card image cap">
+              {% for item in service_Items %}
+                <div class="col-md-3 mx-auto">
+                    <div class="card align-items-center itemCrads">
+                      <h5 class="card-title">{{item.name}}</h5>
+                          <img class="card-img-top" src="{% static item.image %}" alt="{{item.name}}">
                           <div class="card-body">
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <button type="submit" class="btn btn-primary mb-2">View Details</button>
+                            <p class="card-text">{{item.description}}</p>
+                            <p class="card-text red">Price: {{item.price}} BHD</p>
+                            {% url 'serviceDetails' serviceId=item.id as itemLink %}
+                            <a href="{{itemLink}}" class="btn btn-primary mb-2">View Details</a>
                             <form class="form-inline">
                               <div class="input-group mb-3">
                                 <input type="number" class="form-control" placeholder="Qty" min="1">
@@ -35,6 +39,16 @@
                           </div>
                     </div>
                 </div>
+              {% endfor %}
+
+
+              <div class="col-md-3 mx-auto">
+                  <div class="card align-items-center itemCrads">
+                    <br>
+                    <a {% if request.path == servicesPg1 %} href="/addService/si/" {% elif request.path == servicesPg2 %} href="/addService/ai/" {% elif request.path == servicesPg3 %} href="/addService/cv/" {% endif %}  class="btn btn-primary mb-2">+</a>
+                    <br>
+                  </div>
+              </div>
 
             </div>
         </div>

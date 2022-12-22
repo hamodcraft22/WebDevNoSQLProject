@@ -3,6 +3,8 @@ from MoMaShop import views
 
 urlpatterns = [
     path("", views.home, name="home"),
-    path("services/<int:id>/", views.services, name="services"),
+    path("services/<str:categoryid>/", views.services, name="services"),
+    path("addService/<str:categoryid>/", views.addService, name="addService"),
+    path("serviceDetails/<int:serviceId>/", views.serviceDetails, name="serviceDetails"),
     path("cart/", views.cart, name="cart")
 ]
