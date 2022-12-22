@@ -1,10 +1,11 @@
 /*Full Website Style*/
 @font-face {font-family: mainFont; src: url(font.ttf);}
 
-html, body {height: 100%; width: 100%; margin: 0;}
+html, body {height: 100%; width: 100%; margin: 0; line-height: normal; color: black}
 
 body {font-family: mainFont; background-color: #c1c1e1;}
 a {text-decoration: none;}
+p {color: black;}
 
 .errorPage { text-align: center; background: url(media/ERROR.png);
   background-size: 100%; background-position: center;}
@@ -18,13 +19,14 @@ a {text-decoration: none;}
 
 #mainLogo {height: inherit;}
 
-.menuNav a {position: fixed; transition: 0.3s; width: 130px; color: white;
-  font-size: 20px; padding: 15px;}
+.menuNav a {position: fixed; min-width: 130px; transition: 0.3s; color: white;
+  font-size: 20px; padding: 15px; box-sizing: content-box;}
 
 #menuR a {right: -105px; border-radius: 5px 0px 0px 5px; text-align: right;}
 #menuL a {left: -105px; border-radius: 0px 5px 5px 0px; text-align: left;}
 
 #menuR .active {right: 0px;}
+#menuL .active {left: 0px;}
 #menuR a:hover {right: 0;}
 #menuL a:hover {left: 0;}
 
@@ -32,8 +34,12 @@ a {text-decoration: none;}
 #services {top: 70px; background-color: #67549c;}
 #cart     {top: 130px; background-color: #bf5151;}
 #reviews  {top: 190px; background-color: #f38686;}
-#phone     {top: 70px; background-color: #2b38b2;}
-#mail {top: 130px; background-color: #bf5151;}
+
+
+#userLogo {margin-left: 15px}
+#account  {top: 40px; background-color: #2b38b2;}
+#phone    {top: 100px; background-color: #67549c;}
+#mail     {top: 160px; background-color: #bf5151;}
 
 .navIconR {float: left; width: 27px;} .navIconL {float: right; width: 27px;}
 /*End Main Top Menu - on all pages*/
@@ -55,16 +61,15 @@ a {text-decoration: none;}
 
 /*Page content - on all page*/
 #midCont {background-color: #a2a2ca; position: absolute; width: 80%;
-  top: 255px; right: 10%; bottom: 40px; overflow: auto; z-index: 3;
-  box-shadow:  -10px 0px 15px -15px, 10px 0px 15px -15px;}
+  top: 255px; right: 10%; bottom: 40px; overflow-y: auto; z-index: 3;
+  box-shadow: -10px 0px 15px -15px, 10px 0px 15px -15px; overflow-x: hidden;}
 
 #btmPicture {position: fixed; bottom: 0px; left: 0px; width: 15%; z-index: 5;}
 
-#backVid {position: fixed; top: 100px; bottom: 40px; height: 100%;
-  object-fit: cover; right: 10%; width: 80%; z-index: -1;}
-
 #bttmBar {position: fixed; height: 40px; width: 100%; bottom: 0; left: 0;
   background-color: #333333; text-align: center; z-index: 4;}
+
+#copyrightText {margin-top: 10px; margin-bottom: 0px;}
 /*End Page content - on all page*/
 
 
@@ -98,11 +103,13 @@ a {text-decoration: none;}
 
 
 /*Hompage Spisific Styling*/
-#homeCont {position: absolute; width: 80%;
-  top: 255px; right: 10%; bottom: 40px; overflow: auto; z-index: 3;
-  box-shadow:  -10px 0px 15px -15px, 10px 0px 15px -15px;}
+#homeCont {position: absolute; width: 100%; height:100%; overflow: hidden;
+  z-index: 3; box-shadow: -10px 0px 15px -15px, 10px 0px 15px -15px;}
 
-#innerTopCont {height: 200px; color: white;
+#backVid {position: absolute; bottom: 0px; height: 100%;
+  object-fit: cover; width: 100%; z-index: -1;}
+
+#innerTopCont {position: relative; height: 235px; color: white;
   background-color: rgba(0, 0, 0, 0.6);
   box-shadow: 0 20px 40px 30px rgba(0, 0, 0, 0.6);}
 
@@ -110,21 +117,41 @@ a {text-decoration: none;}
 
 #youtubeFrame {width: 100%; height: 100%; border: none;}
 
-#textWrapCont {float: left; width: 70%; height: 100%;}
+#textWrapCont {float: left; width: 70%; height: 100%; overflow: auto;}
 
-#textCont {margin: 2%;}
+#textCont {margin: 2%; overflow: auto;}
 
-#aboutCont {position: absolute; bottom: 40px; text-align: center;
-  background-color: rgba(255, 255, 255, 0.4); width: 80%; left: 10%;
+#homeQuickLinks {position: absolute; top: 235px; bottom: 15%; overflow:
+   auto; width: 100%}
+
+#aboutText {font-size: 100%; margin-bottom: 0px;}
+
+#aboutCont {position: absolute; bottom: 0px; text-align: center;
+  background-color: rgba(255, 255, 255, 0.4); width: 100%; height: 100px;
   box-shadow: 0 20px 40px 30px rgba(255, 255, 255, 0.6);}
 
-#aboutTxtCont {margin-left: 2%; margin-right: 2%;}
+#aboutTxtCont {margin-left: 2%; margin-right: 2%; position: absolute;
+  bottom: 1em; overflow: auto; max-height: 100%; max-width: 100%}
+
+#homeInfo1 {display: block; font-size: 1.5em; margin-block-start: 0.83em;
+    margin-block-end: 0.83em; margin-inline-start: 0px; margin-inline-end: 0px;
+    font-weight: bold; margin: 0;}
+
+#homeInfo2 {display: block; font-size: 2em; margin-block-start: 0.67em;
+    margin-block-end: 0.67em; margin-inline-start: 0px; margin-inline-end: 0px;
+    font-weight: bold; margin: 0;}
+
+#homeInfo3 {display: block; margin-block-start: 1em; margin-block-end: 1em;
+    margin-inline-start: 0px; margin-inline-end: 0px; margin: 0; color: white;}
+
+.homeCrads {background-color: rgba(103,84,156,0.2); border: 0;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);}
 /*End Hompage Spisific Styling*/
 
 
 
 /*Shared Between Home And Services*/
-#itemsCont {position: absolute; width: 100%; padding-top: 2em;}
+#itemsCont {position: absolute; width: 100%; top: 42px; bottom: 0px;}
 
 .item {text-align: center; background: url(media/blur.png); width: 33%;
    background-repeat: no-repeat; background-position: center;

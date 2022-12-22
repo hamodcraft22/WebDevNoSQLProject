@@ -1,0 +1,81 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+
+    <meta charset="utf-8">
+    <title>The Moma Company</title>
+
+    <link rel="icon" href="{% static 'base/media/momaLogo.png' %}" type="image/png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'base/styles.css' %}">
+
+  </head>
+
+  <body>
+
+    <!--the header div for the top of the page and navigation bar-->
+    <div id="header">
+
+      <!--the header logo of the site (moma long logo)-->
+      <img src="{% static 'base/media/bannerLogo.png' %}" alt="MoMa Logo" id="mainLogo">
+
+      <!--left nav menus-->
+      <div class="menuNav" id="menuR">
+        {% url 'home' as homePg %}
+        <a href="{{homePg}}" {% if request.path == homePg %} class="active" {% endif %} id="home"><img class="navIconR" src="{% static 'base/media/home.png' %}" alt="Home Page">Home</a>
+
+        {% url 'services' id=1 as servicesPg1 %}
+        {% url 'services' id=2 as servicesPg2 %}
+        {% url 'services' id=3 as servicesPg3 %}
+        <a href="{{servicesPg1}}" {% if request.path == servicesPg1 or request.path == servicesPg2 or request.path == servicesPg3 %} class="active" {% endif %} id="services"><img class="navIconR" src="{% static 'base/media/services.png' %}" alt="Services Page">Services</a>
+
+        {% url 'cart' as cartPg %}
+        <a href="{{cartPg}}" {% if request.path == cartPg %} class="active" {% endif %} id="cart"><img class="navIconR" src="{% static 'base/media/cart.png' %}" alt="View Cart Page">Cart</a>
+
+        {% url 'reviews' as reviewPg %}
+        <a href="{{reviewPg}}" {% if request.path == reviewPg %} class="active" {% endif %} id="reviews"><img class="navIconR" src="{% static 'base/media/reviews.png' %}" alt="Reviews Page">Reviews</a>
+      </div>
+
+      <!--right nav menus-->
+      <div class="menuNav" id="menuL">
+        <a href="tel:37702893" id="account" <!-- add active part if statment when logged in to also add href chnage based on if login--><img class="navIconL" id="userLogo" src="{% static 'base/media/user.png' %}" alt="Home Page"><!-- chnage text based on user if statment-->Login</a>
+        <a href="tel:37702893" id="phone"><img class="navIconL" src="{% static 'base/media/call.png' %}" alt="Home Page">Call Us</a>
+        <a href="mailto:momacorporation@gmail.com" id="mail"><img class="navIconL" src="{% static 'base/media/mail.png' %}" alt="Services Page">Email Us</a>
+      </div>
+
+    </div>
+
+    <!--fixed bottem picture-->
+    <img id="btmPicture" src="{% static 'base/media/sidePhoto.png' %}" alt="Hato & Youta waving">
+
+
+    <!-- ***************************************************** page spisific parts here ***************************************************** -->
+
+
+
+    <!-- full mid container - no background for home vid(thats the if statment)-->
+    <div id="midCont">
+
+
+      {% block mainBody %}
+
+      {% endblock mainBody %}
+
+
+    </div>
+
+
+
+    <!-- page footer for copyright-->
+    <div id="bttmBar">
+      <p id="copyrightText">Designed by the The MoMa Company © | 2022 </p>
+    </div>
+
+
+
+
+
+  </body>
+</html>

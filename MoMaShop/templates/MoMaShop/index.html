@@ -1,12 +1,115 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block mainBody %}
-content here
 
-<div id="aboutCont">
-  <div id="aboutTxtCont">
-    <p><span class="white">About Us: </span>Our organization had its early start in 2010, a little boy and his cousin had the idea of creating a short movie using a story he dreamed of. Lots of dedication and passion the two kids continued working to accomplish the dream. The development of The MoMa Company which name is derived from both kids’ names has become an entertaining and media creation company which also provides custom orders and services for the public </p>
+<video autoplay muted loop id="backVid">
+  <source src="{% static 'base/media/backVideo.mp4' %}" type="video/mp4">
+</video>
+
+<div id="homeCont">
+
+
+
+<!-- top half container to house heading of mid section-->
+  <div id="innerTopCont">
+
+    <!-- left container to house text-->
+    <div id="textWrapCont">
+
+      <!-- inner text container - added for ⭐extra ocd🌟 and responsivnis-->
+      <div id="textCont">
+        <h2 class="centerNoMarg" id="homeInfo1">The MoMa Company</h2>
+        <h1 class="centerNoMarg" id="homeInfo2">The Best CGI Designer/ Animation Company in Bahrain</h1>
+        <p class="centerNoMarg" id="homeInfo3">3D animation is the best form of visually represent your story, share the moment, or even unleash your
+          <br>
+          creativity, with the MoMa Company, we grantee you the most beautiful animation you’ve ever dreamed of!!
+        </p>
+
+        <a href="https://www.youtube.com/channel/UCaTjgvM494vNTbEtMOvCOKw"><img src="{% static 'base/media/youtube.png' %}" alt="Youtube Link"></a>
+        <a href="https://www.instagram.com/the_moma_company/"><img src="{% static 'base/media/instagram.png' %}" alt="Instagram Link"></a>
+        <a href="https://twitter.com/TheMoMaCompany"><img src="{% static 'base/media/twitter.png' %}" alt="Twitter Link"></a>
+      </div>
+
+    </div>
+
+    <!-- right conaitenr to hosue latest youtube vid-->
+    <div id="player">
+      <iframe id="youtubeFrame" src="https://www.youtube.com/embed/nuNCqAJTljU"></iframe>
+    </div>
+
   </div>
+
+
+
+  <div id="homeQuickLinks">
+
+    <div class="container h-100">
+        <div class="row align-items-center h-100">
+
+            <div class="col-md-3 mx-auto">
+                <div class="card align-items-center homeCrads">
+                  <h2 class="lightPurpel">Still Image</h2>
+                  <div class="itemList">
+                    <ul>
+                      <li>Delivery within a week</li>
+                      <li>Up to 8k Resulations</li>
+                      <li>includes 2 renders per scene</li>
+                      <li>no minimam - flexible renders</li>
+                    </ul>
+                  </div>
+                  <p class="red">Starts from 5 BHD</p>
+                  <a class="btn3D_Link" href="services/1/">View Plans</a>
+                </div>
+            </div>
+
+            <div class="col-md-3 mx-auto">
+              <div class="card align-items-center homeCrads">
+                <h2 class="lightPurpel">Animated Images</h2>
+                <div class="itemList">
+                  <ul>
+                    <li>minimam of 5 frames</li>
+                    <li>up to 30 seconds</li>
+                    <li>expenontial dilivery time</li>
+                    <li>includes 2 scense</li>
+                  </ul>
+                  </div>
+                  <p class="red">Starts from 15 BHD</p>
+                  <a class="btn3D_Link" href="services/2/">View Plans</a>
+                </div>
+            </div>
+
+            <div class="col-md-3 mx-auto">
+              <div class="card align-items-center homeCrads">
+                <h2 class="lightPurpel">Customized Videos</h2>
+                <div class="itemList">
+                  <ul>
+                    <li>starts from 30 seconds</li>
+                    <li>free consiltation</li>
+                    <li>includes character design</li>
+                    <li>free montoage</li>
+                  </ul>
+                </div>
+                <p class="red">Starts from 50 BHD</p>
+                <a class="btn3D_Link" href="services/3/">View Plans</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+  </div>
+
+
+<!-- About Us container-->
+  <div id="aboutCont">
+    <div id="aboutTxtCont">
+      <p id="aboutText"><span class="white">About Us: </span>Our organization had its early start in 2010, a little boy and his cousin had the idea of creating a short movie using a story he dreamed of. Lots of dedication and passion the two kids continued working to accomplish the dream. The development of The MoMa Company which name is derived from both kids’ names has become an entertaining and media creation company which also provides custom orders and services for the public </p>
+    </div>
+
+  </div>
+
 </div>
+
 
 {% endblock mainBody %}
