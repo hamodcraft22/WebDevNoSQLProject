@@ -11,3 +11,10 @@ class addItemForm(forms.Form):
     description = forms.CharField(widget=forms.Textarea())
     price = forms.FloatField()
     image = forms.FileField()
+
+class addCommentForm(forms.Form):
+    title = forms.CharField()
+    body = forms.CharField()
+
+class addOrderItemForm(forms.Form):
+    quantity = forms.IntegerField()

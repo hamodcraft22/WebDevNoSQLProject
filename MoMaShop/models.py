@@ -53,6 +53,7 @@ class Order(models.Model):
 
 class Comment(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    title = models.CharField(max_length=150)
     body = models.TextField()
     createdOn = models.DateTimeField(auto_now_add=True)
     item = models.ForeignKey(Item,on_delete=models.CASCADE)
