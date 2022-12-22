@@ -41,7 +41,7 @@
                 </div>
               {% endfor %}
 
-
+              {% if user.is_authenticated and user.name == admin %}
               <div class="col-md-3 mx-auto">
                   <div class="card align-items-center itemCrads">
                     <br>
@@ -49,6 +49,7 @@
                     <br>
                   </div>
               </div>
+              {% endif %}
 
             </div>
         </div>

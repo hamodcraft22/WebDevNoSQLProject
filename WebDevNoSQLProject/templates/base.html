@@ -40,7 +40,8 @@
 
       <!--right nav menus-->
       <div class="menuNav" id="menuL">
-        <a href="tel:37702893" id="account" <!-- add active part if statment when logged in to also add href chnage based on if login--><img class="navIconL" id="userLogo" src="{% static 'base/media/user.png' %}" alt="Home Page"><!-- chnage text based on user if statment-->Login</a>
+        {% url 'login' as loginPg %}
+        <a href="{% if user.is_authenticated %} {% url 'logout' %} {% else %} {% url 'login' %} {% endif %}" id="account" {% if user.is_authenticated or request.path == loginPg %} class="active" {% endif %}> <img class="navIconL" id="userLogo" src="{% static 'base/media/user.png' %}" alt="Home Page">{{user.username|default:'Login'}}{% if user.is_authenticated %} ,Logout? {% endif %}</a>
         <a href="tel:37702893" id="phone"><img class="navIconL" src="{% static 'base/media/call.png' %}" alt="Home Page">Call Us</a>
         <a href="mailto:momacorporation@gmail.com" id="mail"><img class="navIconL" src="{% static 'base/media/mail.png' %}" alt="Services Page">Email Us</a>
       </div>
