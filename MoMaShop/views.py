@@ -2,19 +2,28 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 
 
-from MoMaShop.models import Item, Comment, OrderItem
-from MoMaShop.forms import addItemForm, addCommentForm, addOrderItemForm
+from MoMaShop.models import Item, Comment, Order, OrderItem
+from MoMaShop.forms import addItemForm, addCommentForm
 from MoMaShop.uploadFile import handle_uploaded_file
 
 # Create your views here.
 def home(request):
     return render(request, "MoMaShop/index.html")
 
+
+
+
 def services(request, categoryid):
     service_Items = Item.objects.filter(category=categoryid)
     return render(request, "MoMaShop/services.html", {"service_Items":service_Items})
 
+
+
+
 def addService(request, categoryid):
+
+    ItemForm = addItemForm()
+
     if request.method == "POST":
         ItemForm = addItemForm(request.POST, request.FILES)
         if ItemForm.is_valid():
@@ -31,10 +40,11 @@ def addService(request, categoryid):
             itemObj.save()
 
             return HttpResponseRedirect("/services/{}/".format(categoryid))
-    else:
-        ItemForm = addItemForm()
 
     return render(request, "MoMaShop/addService.html", {"ItemForm":ItemForm})
+
+
+
 
 def serviceDetails(request, serviceId):
     service_Item = Item.objects.get(id=serviceId)
@@ -56,24 +66,48 @@ def serviceDetails(request, serviceId):
 
     return render(request, "MoMaShop/serviceDetails.html", returned)
 
+
+
+
+
 def cart(request):
     return render(request, "MoMaShop/cart.html")
 
 
 
-def addOrderItem(request, serviceId):
-    serviceIt_ToAdd = Item.objects.get(id=serviceId)
 
-    additemForm = addOrderItemForm()
 
-    if request.method == "POST":
-        additemForm = addOrderItemForm(request.POST)
-        if additemForm.is_valid():
+def addOrderItem(request, serviceId, quantity):
+    # adding orderItem (many to many) to database
+    serviceItem_ToAdd = Item.objects.get(id=serviceId)
 
-            user = request.user
-            quantity = additemForm.cleaned_data["quantity"]
+    user = request.user
 
-            newOrderItem = OrderItem(user=user,item=serviceIt_ToAdd,quantity=quantity)
+    #there is a present order
+    if Order.objects.filter(user=user, ordererd="false"):
+        presentOrder = Order.objects.get(user=user, ordererd="false")
+
+        # the item is alredy present in the order
+        if presentOrder.items.filter(item=serviceItem_ToAdd):
+            presentItem = presentOrder.items.get(item=serviceItem_ToAdd)
+            presentItem.quantity += quantity
+            presentItem.save()
+        else:
+            # the item is new ti the order
+            newOrderItem = OrderItem(user=user,item=serviceItem_ToAdd,quantity=quantity)
             newOrderItem.save()
 
-    return render(request, "MoMaShop/addOrderItem.html", {"additemForm":additemForm})
+            presentOrder.items.add(newOrderItem)
+            presentOrder.save()
+    else:
+        # no order is found
+        newOrder = Order(user=user)
+        newOrder.save()
+
+        newOrderItem = OrderItem(user=user,item=serviceItem_ToAdd,quantity=quantity)
+        newOrderItem.save()
+
+        newOrder.items.add(newOrderItem)
+
+    # go to cart upon adding
+    return HttpResponseRedirect("/cart/")

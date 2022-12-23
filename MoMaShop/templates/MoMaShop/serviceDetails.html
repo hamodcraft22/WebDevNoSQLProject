@@ -11,7 +11,7 @@
         <div class="container w-80">
           <div class="row">
 
-            <div class="col-md-4">
+            <div class="card col-md-4 itemCrads">
               <h1>{{ service_Item.title }}</h1>
 
               <img src="{% static service_Item.image %}" alt="{{ service_Item.title }}" width="100%">
@@ -21,7 +21,7 @@
               <p>{{ service_Item.description }}</p>
             </div>
 
-            <div class="col-md-4">
+            <div class="card col-md-4 itemCrads align-items-center">
               <h3>Leave a comment</h3>
               <form method="POST">
                 {% csrf_token %}
@@ -30,13 +30,12 @@
               </form>
             </div>
 
-            <div class="col-md-4">
+            <div class="card col-md-4 itemCrads">
               <h3>Comments</h3>
               {% for comment in allComments %}
-              <p>
-                On: {{ comment.createdOn }}
-                <b>{{ comment.user }}</b> wrote:
-              </p>
+              <p><b>On: </b>{{ comment.createdOn }}</p>
+              <p><b>{{ comment.user }}</b> wrote:</p>
+
               <p>{{ comment.body }}</p>
               <br>
               <br>

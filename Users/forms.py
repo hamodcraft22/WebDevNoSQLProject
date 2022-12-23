@@ -7,7 +7,7 @@ class UserRegistrationForm(UserCreationForm):
     email = forms.EmailField(help_text='A valid email address, please.', required=True)
     address = forms.CharField()
     country = forms.CharField()
-    birthDate = forms.DateField()
+    birthDate = forms.DateField(widget=forms.TextInput(attrs={'class': 'form-control', 'type':'date'}))
 
     class Meta:
         model = get_user_model()

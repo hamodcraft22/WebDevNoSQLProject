@@ -15,6 +15,3 @@ class addItemForm(forms.Form):
 class addCommentForm(forms.Form):
     title = forms.CharField()
     body = forms.CharField()
-
-class addOrderItemForm(forms.Form):
-    quantity = forms.IntegerField()

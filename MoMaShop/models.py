@@ -35,14 +35,14 @@ class OrderItem(models.Model):
 
 class Order(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    items = models.ManyToManyField(OrderItem)
+    items = models.ArrayReferenceField(to=OrderItem, on_delete=models.CASCADE)
     startDate = models.DateTimeField(auto_now_add=True)
     orderDate = models.DateTimeField()
     paymentType = models.CharField(choices=PAYMENT_CHOICES, max_length=2)
     cardNum = models.IntegerField()
     cardExp = models.DateField()
     comments = models.TextField()
-    ordererd = models.BooleanField(default=False)
+    ordererd = models.CharField(default="false", max_length=5)
 
     def getTotal(self):
         total = 0

@@ -28,20 +28,24 @@
                             <p class="card-text red">Price: {{item.price}} BHD</p>
                             {% url 'serviceDetails' serviceId=item.id as itemLink %}
                             <a href="{{itemLink}}" class="btn btn-primary mb-2">View Details</a>
+
+
                             <form class="form-inline">
                               <div class="input-group mb-3">
                                 <input type="number" class="form-control" placeholder="Qty" min="1">
                                 <div class="input-group-append">
-                                  <button class="btn btn-secondary" type="button">Button</button>
+                                  <button class="btn btn-secondary" type="button">Cart</button>
                                 </div>
                               </div>
                             </form>
+
+
                           </div>
                     </div>
                 </div>
               {% endfor %}
 
-              {% if user.is_authenticated and user.name == admin %}
+              {% if user.is_superuser %}
               <div class="col-md-3 mx-auto">
                   <div class="card align-items-center itemCrads">
                     <br>
