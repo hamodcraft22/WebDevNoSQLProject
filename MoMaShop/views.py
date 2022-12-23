@@ -1,9 +1,14 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
+import datetime
+from django.contrib.auth.decorators import login_required
+
+
+
 
 
 from MoMaShop.models import Item, Comment, Order, OrderItem
-from MoMaShop.forms import addItemForm, addCommentForm, addToOrderForm
+from MoMaShop.forms import addItemForm, addCommentForm, addToOrderForm, checkoutForm
 from MoMaShop.functions import handle_uploaded_file, addOrderItem
 
 # Create your views here.
@@ -17,7 +22,7 @@ def services(request, categoryid):
     service_Items = Item.objects.filter(category=categoryid)
 
     addToCartForm = addToOrderForm()
-    if request.method == "POST":
+    if request.method == "POST" and "addToOrder" in request.POST:
         addToCartForm = addToOrderForm(request.POST)
         if addToCartForm.is_valid():
 
@@ -27,13 +32,18 @@ def services(request, categoryid):
             addOrderItem(request=request,serviceId=itemID,quantity=quantity)
             return HttpResponseRedirect("/cart/")
 
+    if request.method == "POST" and "removeItem" in request.POST:
+        itemID = request.POST["ItemID"]
+
+        itemDelete = Item.objects.get(id=itemID)
+        itemDelete.delete()
 
     returned = {"service_Items":service_Items, "addToOrderForm":addToCartForm}
     return render(request, "MoMaShop/services.html", returned)
 
 
 
-
+@login_required
 def addService(request, categoryid):
 
     ItemForm = addItemForm()
@@ -55,11 +65,13 @@ def addService(request, categoryid):
 
             return HttpResponseRedirect("/services/{}/".format(categoryid))
 
+
+
     return render(request, "MoMaShop/addService.html", {"ItemForm":ItemForm})
 
 
 
-
+@login_required
 def serviceDetails(request, serviceId):
     service_Item = Item.objects.get(id=serviceId)
 
@@ -83,6 +95,69 @@ def serviceDetails(request, serviceId):
 
 
 
-
+@login_required
 def cart(request):
-    return render(request, "MoMaShop/cart.html")
+    try:
+        user = request.user
+
+        customerOrder = Order.objects.get(user=user, ordererd="false")
+        customerItems = customerOrder.items.all()
+
+        actualItems = {}
+
+        counter=0
+
+        for item in customerItems:
+            actualItems[item] = (customerItems[counter].item)
+            counter += 1
+
+        ## update item quantity
+        if request.method == "POST" and "updateQty" in request.POST:
+
+            orderItemID = request.POST["orderItemID"]
+            quantity = request.POST["quantity"]
+
+            orderItemUpdate = OrderItem.objects.get(id=orderItemID)
+            orderItemUpdate.quantity = quantity
+            orderItemUpdate.save()
+
+            return HttpResponseRedirect("/cart")
+
+        if request.method == "POST" and "removeOrderItem" in request.POST:
+            orderItemID = request.POST["orderItemID"]
+
+            orderItemDelete = OrderItem.objects.get(id=orderItemID)
+            orderItemDelete.delete()
+
+            return HttpResponseRedirect("/cart")
+
+        returned = {"actualItems":actualItems, "customerItems":customerItems, "customerOrder":customerOrder}
+
+        return render(request, "MoMaShop/cart.html", returned)
+    except Order.DoesNotExist:
+        return HttpResponse('you have no items in cart')
+
+
+
+@login_required
+def checkout(request):
+    user = request.user
+    customerOrder = Order.objects.get(user=user, ordererd="false")
+
+    checkoutOrderForm = checkoutForm()
+    if request.method == "POST":
+        checkoutOrderForm = checkoutForm(request.POST)
+        if checkoutOrderForm.is_valid():
+
+            customerOrder.orderDate = datetime.datetime.now().date()
+            customerOrder.paymentType = checkoutOrderForm.cleaned_data["paymentType"]
+            customerOrder.cardNum = checkoutOrderForm.cleaned_data["cardNum"]
+            customerOrder.cardExp = checkoutOrderForm.cleaned_data["cardExp"]
+            customerOrder.comments = checkoutOrderForm.cleaned_data["comments"]
+            customerOrder.ordererd = "true"
+
+            customerOrder.save()
+
+            return HttpResponseRedirect("/")
+
+    return render(request, "MoMaShop/checkOut.html", {"checkoutOrderForm":checkoutOrderForm})

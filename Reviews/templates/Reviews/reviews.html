@@ -1,5 +1,36 @@
 {% extends 'base.html' %}
 
 {% block mainBody %}
-  this is the reviews page
+<!--split container - to stretch inner divs to bottem of page-->
+      <div id="innerMidSplitCont">
+
+        <!--left container to view written reviews-->
+        <div id="writtenReviewsCont">
+
+          <!--loop -->
+          {% for review in allReviews %}
+          <div class="reviewCont">
+            <h3>User: <span class="red">{{review.user}}</span></h3>
+            <h3>Rating: <span class="pink">{{review.rating}}</span></h3>
+            <h3>Review: <span class="white">{{review.description}}</span></h3>
+          </div>
+          {% endfor %}
+
+
+        </div>
+
+        <!--right container - to add details for review of user-->
+        <div id="reviewFormCont">
+          <h1 id="reviewStat">Write Your Review:</h1>
+          <form method="POST" >
+
+            <br>
+            {% csrf_token %}
+            {{ addToReviewsForm.as_p }}
+            <br>
+            <input class="btn3D_Input" id="inputButton" type="submit" value="submit" onclick="userReviewSubmitFunc();">
+          </form>
+        </div>
+
+      </div>
 {% endblock mainBody %}

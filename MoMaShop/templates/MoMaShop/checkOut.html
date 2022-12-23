@@ -7,18 +7,16 @@
 <div class="container h-100">
     <div class="row align-items-center h-100">
 
-        <div class="col-md-3 mx-auto">
+        <div class="col-md-5 mx-auto">
             <div class="card align-items-center itemCrads">
                   <div class="card-body">
                     <form method="post">
                       {% csrf_token %}
-                      {{ form.as_p }}
-                      <input type="submit" value="Login">
-                      <a href="{% url "register" %}"><input type="button" value="Register"></a>
-                      <a href="{% url "password_change" %}"><input type="button" value="Change Password"></a>
+                      {{ checkoutOrderForm.as_p }}
+                      <input type="submit" value="Pay">
                     </form>
                     <br>
-                    <a href="{% url "home" %}">back to dashboard</a>
+                    <a href="{% url "cart" %}">back to cart</a>
                   </div>
             </div>
         </div>

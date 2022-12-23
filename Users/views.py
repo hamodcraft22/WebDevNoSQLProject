@@ -22,8 +22,4 @@ def register(request):
     else:
         form = UserRegistrationForm()
 
-    return render(
-        request = request,
-        template_name = "registration/register.html",
-        context={"form":form}
-        )
+    return render( request = request, template_name = "registration/register.html", context={"form":form})

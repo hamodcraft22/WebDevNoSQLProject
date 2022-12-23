@@ -32,14 +32,17 @@
 
             <div class="card col-md-4 itemCrads">
               <h3>Comments</h3>
+              <div class="row">
               {% for comment in allComments %}
+              <div class="card rounded-3 mb-4">
               <p><b>On: </b>{{ comment.createdOn }}</p>
               <p><b>{{ comment.user }}</b> wrote:</p>
 
+              <h2>{{comment.title}}</h2>
               <p>{{ comment.body }}</p>
-              <br>
-              <br>
+              </div>
               {% endfor %}
+            </div>
             </div>
 
             </div>

@@ -1,5 +1,7 @@
 from MoMaShop.models import Item, Order, OrderItem
 
+
+## none view functions
 def handle_uploaded_file(file, loc):
     with open('MoMaShop/static/MoMaShop/img/{0}/{1}'.format(loc,file.name), 'wb+') as destination:
         for chunk in file.chunks():
@@ -7,7 +9,7 @@ def handle_uploaded_file(file, loc):
 
 
 
-## none view functions
+
 def addOrderItem(request, serviceId, quantity):
     # adding orderItem (many to many) to database
     serviceItem_ToAdd = Item.objects.get(id=serviceId)

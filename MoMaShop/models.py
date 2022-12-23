@@ -35,7 +35,7 @@ class OrderItem(models.Model):
 
 class Order(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    items = models.ArrayReferenceField(to=OrderItem, on_delete=models.CASCADE)
+    items = models.ManyToManyField(OrderItem)
     startDate = models.DateTimeField(auto_now_add=True)
     orderDate = models.DateTimeField()
     paymentType = models.CharField(choices=PAYMENT_CHOICES, max_length=2)

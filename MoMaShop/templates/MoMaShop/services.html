@@ -36,11 +36,18 @@
                                 {{addToOrderForm.quantity}}
                                 <input hidden name="ItemID" type="number" value={{item.id}}>
                                 <div class="input-group-append">
-                                  <button class="btn btn-secondary" type="submit">Cart</button>
+                                  <button name="addToOrder" class="btn btn-secondary" type="submit">Cart</button>
                                 </div>
                               </div>
                             </form>
 
+                            {% if user.is_superuser %}
+                            <form class="col-md-1 col-lg-1 col-xl-1 text-end" method="POST">
+                              {% csrf_token %}
+                              <button class="btn px-2" name="removeItem"><img src="{% static 'base/media/trash.png' %}" width="30" alt="remove from cart"></button>
+                              <input hidden name="ItemID" type="number" value={{item.id}}>
+                            </form>
+                            {% endif %}
 
                           </div>
                     </div>

@@ -1,5 +1,64 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block mainBody %}
-  this is the cart page
+
+
+      <!-- below navigation mid container - items spisific-->
+      <div id="itemsCont" >
+        <div class="container h-100 py-5">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-10">
+
+
+            {% for orderItem,item in actualItems.items %}
+              <div class="card rounded-3 mb-4">
+                <div class="card-body p-4">
+                  <div class="row d-flex justify-content-between align-items-center">
+                    <div class="col-md-2 col-lg-2 col-xl-2">
+                      <img src="{% static item.image %}" class="img-fluid rounded-3" alt="{{item.name}}">
+                    </div>
+                    <div class="col-md-3 col-lg-3 col-xl-3">
+                      <p class="lead fw-normal mb-2">{{item.name}}</p>
+                      <p>Price: {{item.price}} BHD</p>
+                      <p class="text-muted">{{item.description}}</p>
+                    </div>
+
+                    <form class="col-md-3 col-lg-3 col-xl-3 d-flex" method="POST">
+                      {% csrf_token %}
+                      <input id="form1" min="0" name="quantity" value="{{orderItem.quantity}}" type="number" class="form-control form-control-sm" />
+                      <input hidden name="orderItemID" type="number" value={{orderItem.id}}>
+                      <button class="btn px-2" name="updateQty"> <p>Update</p> </button>
+                    </form>
+
+                    <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                      <h5 class="mb-0">Total <span class="text-muted">{{ orderItem.getPrice }}</span> BHD </h5>
+                    </div>
+                    <form class="col-md-1 col-lg-1 col-xl-1 text-end" method="POST">
+                      {% csrf_token %}
+                      <button class="btn px-2" name="removeOrderItem"><img src="{% static 'base/media/trash.png' %}" width="30" alt="remove from cart"></button>
+                      <input hidden name="orderItemID" type="number" value={{orderItem.id}}>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+
+            <div class="card mb-4">
+          <div class="card-title text-center">
+            <h1>Total: <span class="text-muted">{{customerOrder.getTotal}}</span> BHD</h1>
+          </div>
+        </div>
+
+              <div class="card">
+                <div class="card-body text-center">
+                  <a href="/checkout" class="btn btn-warning btn-block btn-lg">Proceed to Pay</a>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
 {% endblock mainBody %}
