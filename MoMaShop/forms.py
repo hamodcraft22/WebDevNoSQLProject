@@ -15,3 +15,6 @@ class addItemForm(forms.Form):
 class addCommentForm(forms.Form):
     title = forms.CharField()
     body = forms.CharField()
+
+class addToOrderForm(forms.Form):
+    quantity = forms.IntegerField(min_value=1, widget=forms.NumberInput(attrs={'class': 'form-control'}))
