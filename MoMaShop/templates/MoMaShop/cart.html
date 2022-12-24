@@ -1,3 +1,5 @@
+<title>Cart</title>
+
 {% extends 'base.html' %}
 {% load static %}
 
@@ -24,11 +26,12 @@
                       <p class="text-muted">{{item.description}}</p>
                     </div>
 
-                    <form class="col-md-3 col-lg-3 col-xl-3 d-flex" method="POST">
+                    <form class="col-md-3 col-lg-3 col-xl-3 d-flex align-items-center" method="POST">
                       {% csrf_token %}
+                      <label for="">qty </label>
                       <input id="form1" min="0" name="quantity" value="{{orderItem.quantity}}" type="number" class="form-control form-control-sm" />
                       <input hidden name="orderItemID" type="number" value={{orderItem.id}}>
-                      <button class="btn px-2" name="updateQty"> <p>Update</p> </button>
+                      <button class="btn px-2" name="updateQty"><img src="{% static 'base/media/refresh.png' %}" width="30" alt="remove from cart"></button>
                     </form>
 
                     <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
