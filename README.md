@@ -6,7 +6,7 @@ This is a Univertsity Project for Bahrain Polytechnic 3rd year course - WebDevel
 
 # Django MoMa Shop
 
-This is a complete e-commerce website built with Django and linked with Djongo.
+This is a complete e-commerce website built with Django and linked with Djongo, Bootstrap and custome CSS styling as well.
 
 ---
 
@@ -14,7 +14,7 @@ This is a complete e-commerce website built with Django and linked with Djongo.
 
 The website displays products. Users can add and remove products to/from their cart while also specifying or updating or even deleting the quantity of each item. Users can also comment on each prodect or even review the whole webside in the reviews tab. a superuser is also able to add to remove items from the store. 
 
-[![alt text](https://justdjango.s3-us-west-2.amazonaws.com/media/thumbnails/djecommerce.png "Logo")](https://youtu.be/z4USlooVXG0)
+![image](https://user-images.githubusercontent.com/67144555/209437945-704456f1-f78a-4c51-a4f8-16deae1cbb43.png)
 
 ---
 
