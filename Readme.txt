@@ -1,19 +1,21 @@
-how to do everythin?
+how to do everything?
 
-create vertual env
+create virtual env
 conda create --name MoMaShop django
-pip install requirements.txt
+conda activate MoMaShop
 
-navigate to diracorty
+pip install -r requirements.txt
+
+navigate to directory
 cd "PATH TO YOUR DIRACTORY"
 
 
-do the follwing
-make migrations
-migrate
+do the following
+python manage.py makemigrations
+python manage.py migrate
 
-create super user
+python manage.py createsuperuser --optional
 
 python manage.py shell < setup.py
 
-runserver
+python manage.py runserver
