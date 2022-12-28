@@ -12,16 +12,22 @@ from MoMaShop.forms import addItemForm, addCommentForm, addToOrderForm, checkout
 from MoMaShop.functions import handle_uploaded_file, addOrderItem
 
 # Create your views here.
+
+# home view
 def home(request):
     return render(request, "MoMaShop/index.html")
 
 
 
-
+# service (products) page
 def services(request, categoryid):
+    # collect all items with the correct ctageory id (for a spisifc page)
     service_Items = Item.objects.filter(category=categoryid)
 
+    # create an instance of the add to cart form
     addToCartForm = addToOrderForm()
+
+    # if the add to cart button was pressed
     if request.method == "POST" and "addToOrder" in request.POST:
         addToCartForm = addToOrderForm(request.POST)
         if addToCartForm.is_valid():
@@ -32,6 +38,7 @@ def services(request, categoryid):
             addOrderItem(request=request,serviceId=itemID,quantity=quantity)
             return HttpResponseRedirect("/cart/")
 
+    # if the super user clicks on the remove button
     if request.method == "POST" and "removeItem" in request.POST:
         itemID = request.POST["ItemID"]
 
@@ -43,14 +50,19 @@ def services(request, categoryid):
 
 
 
+# add new service (product) to the store, has to be logged in
 @login_required
 def addService(request, categoryid):
 
+    # create an instance of the add item form
     ItemForm = addItemForm()
 
+    # if the submit button is clicked
     if request.method == "POST":
+        # get the actual request + the item submited (image)
         ItemForm = addItemForm(request.POST, request.FILES)
         if ItemForm.is_valid():
+            # call the upload button function while passing the actual file and the category (for the path)
             handle_uploaded_file(request.FILES['image'], categoryid)
 
             name = ItemForm.cleaned_data["name"]
@@ -60,6 +72,7 @@ def addService(request, categoryid):
             imageFileName = request.FILES['image'].name
             imagePath = "MoMaShop/img/{0}/{1}".format(category,imageFileName)
 
+            # create a new item and save it in the database (djongo MongoDB)
             itemObj = Item(name=name,description=description,category=category,price=price,image=imagePath)
             itemObj.save()
 
@@ -70,7 +83,7 @@ def addService(request, categoryid):
     return render(request, "MoMaShop/addService.html", {"ItemForm":ItemForm})
 
 
-
+# view details / comment on services
 @login_required
 def serviceDetails(request, serviceId):
     service_Item = Item.objects.get(id=serviceId)
@@ -94,12 +107,15 @@ def serviceDetails(request, serviceId):
 
 
 
-
+# cart view function
 @login_required
 def cart(request):
+    # exception handler, display a cart empty message if the cart is empty
     try:
+        # get the current user
         user = request.user
 
+        # check if the user has a current order, if it DoesNotExist it will throw a not found exception - extra challanging work 😊
         customerOrder = Order.objects.get(user=user, ordererd="false")
         customerItems = customerOrder.items.all()
 
@@ -107,11 +123,13 @@ def cart(request):
 
         counter=0
 
+        # retrive the actual items (products) of the order - requiried since its using a many to many field and it dosent return an actual object
         for item in customerItems:
             actualItems[item] = (customerItems[counter].item)
             counter += 1
 
-        ## update item quantity
+
+        ## update item quantity function - user can update quantity within cart
         if request.method == "POST" and "updateQty" in request.POST:
 
             orderItemID = request.POST["orderItemID"]
@@ -123,6 +141,7 @@ def cart(request):
 
             return HttpResponseRedirect("/cart")
 
+        # remove item from cart
         if request.method == "POST" and "removeOrderItem" in request.POST:
             orderItemID = request.POST["orderItemID"]
 
@@ -138,7 +157,7 @@ def cart(request):
         return HttpResponse('you have no items in cart')
 
 
-
+# checkout - set order status as true - as ordered
 @login_required
 def checkout(request):
     user = request.user
