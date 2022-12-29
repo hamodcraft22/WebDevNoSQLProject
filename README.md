@@ -59,7 +59,7 @@ python manage.py shell < setup.py
 ```
 
 
---optional, create a superuser account to be bale to chnage store config (limited to super users only)
+--optional, create a superuser account to be abale to chnage store config (limited to super users only)
 
 ```
 python manage.py createsuperuser 
