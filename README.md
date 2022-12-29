@@ -30,7 +30,7 @@ conda create --name MoMaShop django
 Clone or download this repository and open it in your editor of choice. In an anconda CMD terminal, run the following command in the base directory of this project
 
 ```
-conda create --name MoMaShop django
+cd "PATH TO FILE"
 ```
 
 That will create a new envaormint `MoMaShop` in your project directory. Next activate it with this command:
