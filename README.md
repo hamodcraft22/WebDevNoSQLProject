@@ -22,6 +22,10 @@ The website displays products. Users can add and remove products to/from their c
 
 To get this project up and running you should start by having Python, MongoDB installed on your computer. It's advised you create a virtual environment to store your projects dependencies separately. You are recomended to use the cmd prompt from anaconda navigator
 
+cd to the diractory of the project (you can ctrl + right cilck and select copy path on the folder)
+```
+conda create --name MoMaShop django
+```
 
 Clone or download this repository and open it in your editor of choice. In an anconda CMD terminal, run the following command in the base directory of this project
 
