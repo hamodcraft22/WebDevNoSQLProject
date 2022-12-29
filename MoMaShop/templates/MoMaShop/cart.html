@@ -55,7 +55,7 @@
 
               <div class="card">
                 <div class="card-body text-center">
-                  <a href="/checkout" class="btn btn-warning btn-block btn-lg">Proceed to Pay</a>
+                  <button onclick="window.location.href = '/checkout';" class="btn btn-warning btn-block btn-lg" {%if customerOrder.getTotal == 0%} disabled {% endif %}>Proceed to Pay</button>
                 </div>
               </div>
 
