@@ -1,0 +1,58 @@
+<title>Add Services</title>
+
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block mainBody %}
+
+
+<div class="container h-100">
+    <div class="row align-items-center h-100">
+        <div class="col-md-6 mx-auto">
+            <div class="card align-items-center itemCrads">
+              <img src="{%static service_Item.image%}" alt="{{service_Item.name}}" class="card-img-top">
+                <br>
+                <form method="POST" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  <input type="hidden" name="csrfmiddlewaretoken" value="NiKA8Fj3AAuOOwUC7eqQBKG25k66E4j4xrrBaYxUP56VbxRgI3rTdPCvyhmj6ZWy">
+                  <p>
+                    <label for="id_name">Name:</label>
+                    <input type="text" name="name" maxlength="100" required="" id="id_name" value="{{service_Item.name}}">
+
+
+                  </p>
+
+
+                  <p>
+                    <label for="id_description">Description:</label>
+                    <textarea name="description" cols="40" rows="10" required="" id="id_description" >{{service_Item.description}}</textarea>
+
+
+                  </p>
+
+
+                  <p>
+                    <label for="id_price">Price:</label>
+                    <input type="number" name="price" step="any" required="" id="id_price" value="{{service_Item.price}}">
+
+
+                  </p>
+
+                  <p>
+                    <label for="id_image">Image:</label>
+
+                    <input type="file" name="image" id="id_image">
+
+                  </p>
+
+                  <input hidden name="categoryid" type="text" value={{service_Item.category}}>
+                  <input type="submit" name="btn btn-primary" value="Update">
+                </form>
+                      <br>
+                  </div>
+            </div>
+        </div>
+      </div>
+
+{% endblock mainBody %}

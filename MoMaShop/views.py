@@ -32,6 +32,7 @@ def services(request, categoryid):
         addToCartForm = addToOrderForm(request.POST)
         if addToCartForm.is_valid():
 
+            # spicy method of getting information from html page, hidden input in a form that gets the data from the spisifc object in the html page
             itemID = request.POST["ItemID"]
             quantity = addToCartForm.cleaned_data["quantity"]
 
@@ -48,6 +49,42 @@ def services(request, categoryid):
     returned = {"service_Items":service_Items, "addToOrderForm":addToCartForm}
     return render(request, "MoMaShop/services.html", returned)
 
+# edit service (product / item) page, made seprat to include picture, not made using form as custome formating is being used (again becuse of using MongoDB)
+def editService(request, serviceId):
+    service_Item = Item.objects.get(id=serviceId)
+
+    # if the user clickes update
+    if request.method == "POST":
+
+        # get all the items (categories of user)
+        name = request.POST["name"]
+        description = request.POST["description"]
+        category = request.POST["categoryid"]
+        price = request.POST["price"]
+
+
+        # update the new information
+        service_Item.name = name
+        service_Item.description = description
+        service_Item.category = category
+        service_Item.price = price
+
+        # if the user updated the image
+        if len(request.FILES) != 0:
+            # do the whole upload image process
+            imageFileName = request.FILES['image'].name # get image name
+            imagePath = "MoMaShop/img/{0}/{1}".format(category,imageFileName) # manifast an image path (to save to mongoDB)
+
+            handle_uploaded_file(request.FILES['image'], category) # pass the image to the upload file method
+            service_Item.image = imagePath # finally update the image in the db
+
+        # save all the updates
+        service_Item.save()
+
+        return HttpResponseRedirect("/services/{}/".format(category))
+
+
+    return render(request, "MoMaShop/editService.html", {"service_Item":service_Item})
 
 
 # add new service (product) to the store, has to be logged in
