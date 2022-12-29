@@ -51,6 +51,8 @@
                               <button class="btn px-2" name="removeItem"><img src="{% static 'base/media/trash.png' %}" width="30" alt="remove from cart"></button>
                               <input hidden name="ItemID" type="number" value={{item.id}}>
                             </form>
+                            {% url 'editService' serviceId=item.id as editLink %}
+                            <a class="btn btn-secondary" href="{{editLink}}">Edit</a>
                             {% endif %}
 
                           </div>
